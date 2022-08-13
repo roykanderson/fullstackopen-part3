@@ -1,32 +1,26 @@
-POST http://localhost:3001/api/persons
+POST https://shielded-woodland-51742.herokuapp.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "Roy Anderson",
-  "number": "012-345-6789"
-}
-
-###
-POST http://localhost:3001/api/persons
-Content-Type: application/json
-
-{
-  "number": "012-345-6789"
-}
-
-###
-POST http://localhost:3001/api/persons
-Content-Type: application/json
-
-{
-  "name": "Roy Anderson"
-}
-
-###
-POST http://localhost:3001/api/persons
-Content-Type: application/json
-
-{
-  "name": "Dan Abramov",
+  "name": "Tom Abramov",
   "number": "12-43-234345"
 }
+
+###
+POST https://shielded-woodland-51742.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+  "number": "12-43-234345"
+}
+
+###
+POST https://shielded-woodland-51742.herokuapp.com/api/persons
+Content-Type: application/json
+
+{
+  "name": "Dan Abramov"
+}
+
+###
+DELETE https://shielded-woodland-51742.herokuapp.com/api/persons/75956
