@@ -24,3 +24,6 @@ Content-Type: application/json
 
 ###
 DELETE https://shielded-woodland-51742.herokuapp.com/api/persons/75956
+
+###
+GET https://shielded-woodland-51742.herokuapp.com/api/persons
