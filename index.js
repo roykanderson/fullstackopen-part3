@@ -79,18 +79,39 @@ app.post('/api/persons', (req, res) => {
     return res.status(400).json({ error: 'number missing' })
   }
 
-  if (persons.find(person => person.name === body.name)) {
-    return res.status(400).json({ error: 'name must be unique' })
-  }
-  
-  const person = new Person({
-    name: body.name,
-    number: body.number
-  })
+  Person.exists({ name: body.name })
+    .then(person => {
+      if (person) {
+        return res.status(400).json({ error: 'name must be unique' })
+      }
+    })
+    .then(() => {
+      if (!res.headersSent) {
+        const person = new Person({
+          name: body.name,
+          number: body.number
+        })
+      
+        person.save().then(savedPerson => {
+          res.json(savedPerson)
+        })
+      }
+    })
+})
 
-  person.save().then(savedPerson => {
-    res.json(savedPerson)
-  })
+app.put('/api/persons/:id', (req, res, next) => {
+  const body = req.body
+
+  const person = {
+    name: body.name,
+    number: body.number,
+  }
+
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    .then(updatedPerson => {
+      res.json(updatedPerson)
+    })
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (req, res) => {
