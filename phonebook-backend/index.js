@@ -4,11 +4,10 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
-const { response } = require('express')
 
 const app = express()
 
-morgan.token('data', (req, res) => JSON.stringify(req.body))
+morgan.token('data', req => JSON.stringify(req.body))
 
 app.use(express.json())
 
@@ -38,7 +37,7 @@ app.get('/api/persons', (req, res) => {
   })
 })
 
-app.get('/info', (req, res) => {
+app.get('/info', (req, res, next) => {
   Person.countDocuments()
     .then(count => {
       const number = count
@@ -66,10 +65,11 @@ app.get('/api/persons/:id', (req, res, next) => {
 })
 
 app.delete('/api/persons/:id', (req, res, next) => {
-  Person.findByIdAndRemove(req.params.id).then(result => {
-    res.status(204).end()
-  })
-  .catch(error => next(error))
+  Person.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', (req, res, next) => {
