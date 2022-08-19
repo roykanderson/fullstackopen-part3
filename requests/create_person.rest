@@ -2,12 +2,12 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": "Lauren",
-  "number": "12-433-234345"
+  "name": "Luke",
+  "number": "12-234345"
 }
 
 ###
-POST https://shielded-woodland-51742.herokuapp.com/api/persons
+POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
@@ -19,7 +19,8 @@ POST https://shielded-woodland-51742.herokuapp.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "Dan Abramov"
+  "name": "Dan Abramov",
+  "number": 423
 }
 
 ###
